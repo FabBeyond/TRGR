@@ -10,6 +10,8 @@ TRGR is an extension to the GD-Editor that aims to provide a way of automating c
 To use any script open the editor, pause and click the TRGR-Button at the bottom of the screen. Then hit the Import-button and select the `.json`-File.
 By clicking the Run-Button on any Script it will execute.
 
+In case the Script-Files need to be accessed navigate to `C:\Users\[USER]\AppData\Local\GeometryDash\geode\mods\fabbeyond.trgr\`
+
 ---
 
 ## Script Creation
