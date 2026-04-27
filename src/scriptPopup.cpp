@@ -1,6 +1,7 @@
 #include "scriptPopup.hpp"
 #include <filesystem>
 #include <matjson.hpp>
+#include "Geode/utils/string.hpp"
 #include "luaAPI.hpp"
 #include "createPopup.hpp"
 
@@ -159,7 +160,7 @@ bool ScriptPopup::init() {
 
         auto json = parseResult.unwrap();
 
-        NineSlice *script = createScriptUI(entry.path().filename().string(),
+        NineSlice *script = createScriptUI(utils::string::pathToString(entry.path().filename()),
                                            json["name"].asString().unwrapOr("Unnamed").c_str(),
                                            json["description"].asString().unwrapOr("No description").c_str());
 

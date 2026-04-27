@@ -8,7 +8,7 @@
 TRGR is an extension to the GD-Editor that aims to provide a way of automating certain actions using scripts. By using lua, you can create scripts that change things in the opened level. More on making your own script will be explained later.
 
 To use any script open the editor, pause and click the TRGR-Button at the bottom of the screen. Then hit the Import-button and select the `.json`-File.
-By clicking the Run-Button on any Script it will execute.
+By clicking the Run-Button on any Script it will execute. Sometimes you will need to Save and Quit and reload the level after running a script.
 
 In case the Script-Files need to be accessed navigate to `C:\Users\[USER]\AppData\Local\GeometryDash\geode\mods\fabbeyond.trgr\`
 
@@ -73,11 +73,11 @@ end
 
 TRGR adds a class called `level`. \
 All supported methods of `level`:
-- `getByID(id)`
-- `getAll()`
-- `getSelected()`
-- `getByGroup(group)`
-- `log(message)` \
+- `.getByID(id)`
+- `.getAll()`
+- `.getSelected()`
+- `.getByGroup(group)`
+- `.log(message)` \
 \
 Note: log currently only supports `string` \
 \
@@ -87,5 +87,13 @@ This type has the following properties:
 - `.x`, `.y`
 - `.scaleX`, `.scaleY`
 - `.rotation`
+- `.zOrder`
 - `.zLayer`
-- `.flipX`, `.flipY`
+- `.flipX`, `.flipY`\
+\
+The `GameObject` type also has the following methods:
+- `:move(x, y)`
+- `:moveTo(x, y)`
+- `:rotate(degrees)`
+- `:scale(x, y)`
+- `:delete()`
