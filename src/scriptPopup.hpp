@@ -8,6 +8,7 @@ using namespace std;
 class ScriptPopup : public Popup {
 protected:
     void createScript(CCObject* sender);
+    void installScript(CCObject* sender);
     void favourite(CCObject*);
     NineSlice* createScriptUI(std::string id, char const* name, char const* description);
     void runCode(CCObject*);

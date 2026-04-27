@@ -87,6 +87,36 @@ void ScriptPopup::createScript(CCObject* sender) {
     CreatePopup::create()->show();
 }
 
+void ScriptPopup::installScript(CCObject* sender) {
+    file::FilePickOptions::Filter filter = {
+        .description = "JSON Files",
+        .files = {"*.json"}
+    };
+    file::FilePickOptions options =  {
+        std::nullopt,
+        {filter}
+    };
+
+    async::spawn(
+        file::pick(file::PickMode::OpenFile, options),
+        [this](Result<optional<filesystem::path>> result) {
+            if (!result.isOk()) {
+                return;
+            }
+            auto unwrapped = result.unwrap();
+            if (!unwrapped.has_value()) {
+                return;
+            }
+
+            std::filesystem::copy_file(unwrapped.value(), Mod::get()->getSaveDir() / unwrapped.value().filename(),
+                              std::filesystem::copy_options::overwrite_existing);
+
+            this->onClose(nullptr);
+            ScriptPopup::create()->show();
+        }
+    );
+}
+
 bool ScriptPopup::init() {
     if (!Popup::init(425, 250)) {
         return false;
@@ -146,15 +176,25 @@ bool ScriptPopup::init() {
     menu->setPosition({0, 0});
 
     auto createButton = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Create Script", 0.4f),
+        ButtonSprite::create("Create", 0.4f),
         this,
         menu_selector(ScriptPopup::createScript)
     );
     createButton->setID("create-script-button"_spr);
     createButton->setAnchorPoint({1, 1});
-    createButton->setPosition({410, 235});
+    createButton->setPosition({410, 240});
+
+    auto installButton = CCMenuItemSpriteExtra::create(
+        ButtonSprite::create("Install", 0.4f),
+        this,
+        menu_selector(ScriptPopup::installScript)
+    );
+    installButton->setID("create-install-button"_spr);
+    installButton->setAnchorPoint({1, 1});
+    installButton->setPosition({335, 240});
 
     menu->addChild(createButton);
+    menu->addChild(installButton);
     this->m_mainLayer->addChild(menu);
 
     return true;
