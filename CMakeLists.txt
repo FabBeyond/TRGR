@@ -33,17 +33,12 @@ FetchContent_Declare(
     GIT_REPOSITORY "https://github.com/walterschell/Lua.git"
     GIT_TAG        v5.4.7
 )
-
-if (ANDROID OR IOS)
-    target_compile_definitions(lua_static PRIVATE
-        LUA_USE_POSIX=0
-    )
-endif()
-
 FetchContent_MakeAvailable(lua)
 
 if(TARGET lua_static)
-    target_compile_definitions(lua_static PRIVATE LUA_USE_POSIX=0)
+    if(ANDROID OR IOS)
+        target_compile_definitions(lua_static PRIVATE LUA_USE_POSIX=0)
+    endif()
 endif()
 
 FetchContent_Declare(
