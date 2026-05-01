@@ -28,25 +28,12 @@ endif()
 
 include(FetchContent)
 
-set(LUA_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
-set(LUA_BUILD_AS_DLL OFF CACHE BOOL "" FORCE)
-
-if(ANDROID OR IOS)
-    set(LUA_USE_POSIX OFF CACHE BOOL "" FORCE)
-endif()
-
 FetchContent_Declare(
     lua
     GIT_REPOSITORY "https://github.com/walterschell/Lua.git"
     GIT_TAG        v5.4.7
 )
 FetchContent_MakeAvailable(lua)
-
-if(TARGET lua_static)
-    if(ANDROID OR IOS)
-        target_compile_definitions(lua_static PRIVATE LUA_USE_POSIX=0)
-    endif()
-endif()
 
 FetchContent_Declare(
     sol2
