@@ -1,4 +1,5 @@
 #include "scriptPopup.hpp"
+#include <Geode/Result.hpp>
 #include <filesystem>
 #include <matjson.hpp>
 #include <system_error>
@@ -26,9 +27,13 @@ void ScriptPopup::runCode(CCObject* sender) {
     auto* obj = static_cast<CCString*>(nineSlice->getUserObject("filename"_spr));
 
     auto path = Mod::get()->getSaveDir() / obj->getCString();
-    std::string content = utils::file::readString(path).unwrap();
+    Result<std::string> content = utils::file::readString(path);
+    if (content.isOk()) {
+        log::info("Failed to read script code, not executing script");
+        return;
+    }
 
-    auto parseResult = matjson::parse(content);
+    auto parseResult = matjson::parse(content.unwrap());
     if (!parseResult.isOk()) {
         log::error("Invalid json file: {}", path.filename());
         return;
@@ -36,8 +41,12 @@ void ScriptPopup::runCode(CCObject* sender) {
 
     auto json = parseResult.unwrap();
 
-    auto script = json["code"].asString().unwrapOr("");
-    runScript(script);
+    auto script = json["code"].asString();
+    if (!script.isOk()) {
+        log::error("Failed to get code from json file, not executing script");
+        return;
+    }
+    runScript(script.unwrap());
 }
 NineSlice* ScriptPopup::createScriptUI(std::string id, char const* name, char const* description) {
     auto nineSlice = NineSlice::create(

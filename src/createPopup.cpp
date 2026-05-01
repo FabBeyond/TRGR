@@ -1,10 +1,10 @@
 #include <Geode/Geode.hpp>
 #include "createPopup.hpp"
+#include "Geode/utils/file.hpp"
 #include "scriptPopup.hpp"
 #include <cctype>
 #include <filesystem>
 #include <matjson.hpp>
-#include <fstream>
 
 
 using namespace geode::prelude;
@@ -21,22 +21,20 @@ void CreatePopup::createScript(CCObject* sender) {
 
     std::string code;
 
-    std::ifstream file(path);
-    std::string content(
-        (std::istreambuf_iterator<char>(file)),
-        std::istreambuf_iterator<char>()
-    );
+    auto content = utils::file::readString(path);
+    if (!content.isOk()) {
+        log::error("Failed to read lua file, not creating script");
+        return;
+    }
 
-    script["code"] = content.c_str();
+    script["code"] = content.unwrap().c_str();
 
     std::string filename = nameInput->getString();
     std::replace(filename.begin(), filename.end(), ' ', '_');
     std::transform(filename.begin(), filename.end(), filename.begin(), ::tolower);
     filename += ".json";
 
-    std::ofstream jsonFile(Mod::get()->getSaveDir() / filename);
-    jsonFile << script.dump();
-    jsonFile.close();
+    utils::file::writeStringSafe(Mod::get()->getSaveDir() / filename, script.dump());
 
     this->onClose(nullptr);
     ScriptPopup::instance->close();

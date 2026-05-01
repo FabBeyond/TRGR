@@ -1,3 +1,7 @@
+# 1.0.4
+- More internal changes
+- Added all platforms
+
 # 1.0.3
 - Internal changes
 - Updated about.md
