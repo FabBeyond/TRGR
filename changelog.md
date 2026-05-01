@@ -1,3 +1,7 @@
+# 1.0.3
+- Internal changes
+- Updated about.md
+
 # 1.0.2
 - Internal changes
 - Additional info in about.md

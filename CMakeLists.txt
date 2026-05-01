@@ -28,12 +28,17 @@ endif()
 
 include(FetchContent)
 
-add_subdirectory(vendor/lua)
+FetchContent_Declare(
+    lua
+    GIT_REPOSITORY "https://github.com/walterschell/Lua.git"
+    GIT_TAG        v5.4.7
+)
+FetchContent_MakeAvailable(lua)
 
 FetchContent_Declare(
     sol2
     GIT_REPOSITORY "https://github.com/ThePhD/sol2.git"
-    GIT_TAG        develop
+    GIT_TAG        c1f95a7
 )
 FetchContent_MakeAvailable(sol2)
 

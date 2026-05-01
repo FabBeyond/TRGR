@@ -1,14 +1,13 @@
 # TRGR
 
 <cr>THIS MOD IS IN ALPHA! BUGS AND CRASHES MAY HAPPEN SO BACKUP ANY LEVEL YOU USE THIS ON!</c> \
-<cr>THIS MOD RUNS CODE ON YOUR MACHINE AND MAY DO UNINTENDED THINGS DO YOUR LEVEL IF YOU DO NOT KNOW WHAT THE SCRIPT DOES. IN THE SMALL CHANCE AN EXPLOIT IS FOUND A VIRUS COULD BE INSTALLED ON YOUR COMPUTER.</c>
 
 ## General
 
 TRGR is an extension to the GD-Editor that aims to provide a way of automating certain actions using scripts. By using lua, you can create scripts that change things in the opened level. More on making your own script will be explained later.
 
 To use any script open the editor, pause and click the TRGR-Button at the bottom of the screen. Then hit the Import-button and select the `.json`-File.
-By clicking the Run-Button on any Script it will execute. Sometimes you will need to Save and Quit and reload the level after running a script.
+By clicking the Run-Button on any Script it will execute. Sometimes you will need to Save and Quit and reload the level after running a script. Also be careful with scripts from an untrusted source as they could do unintended things to your level such as messing up or destroying your entire level.
 
 In case the Script-Files need to be accessed navigate to `C:\Users\[USER]\AppData\Local\GeometryDash\geode\mods\fabbeyond.trgr\`
 

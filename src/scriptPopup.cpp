@@ -1,6 +1,9 @@
 #include "scriptPopup.hpp"
 #include <filesystem>
 #include <matjson.hpp>
+#include <system_error>
+#include "Geode/loader/Log.hpp"
+#include "Geode/utils/file.hpp"
 #include "Geode/utils/string.hpp"
 #include "luaAPI.hpp"
 #include "createPopup.hpp"
@@ -23,11 +26,7 @@ void ScriptPopup::runCode(CCObject* sender) {
     auto* obj = static_cast<CCString*>(nineSlice->getUserObject("filename"_spr));
 
     auto path = Mod::get()->getSaveDir() / obj->getCString();
-    ifstream file(path);
-    std::string content(
-        (istreambuf_iterator<char>(file)),
-        istreambuf_iterator<char>()
-    );
+    std::string content = utils::file::readString(path).unwrap();
 
     auto parseResult = matjson::parse(content);
     if (!parseResult.isOk()) {
@@ -109,8 +108,13 @@ void ScriptPopup::installScript(CCObject* sender) {
                 return;
             }
 
+            std::error_code ec;
             std::filesystem::copy_file(unwrapped.value(), Mod::get()->getSaveDir() / unwrapped.value().filename(),
                               std::filesystem::copy_options::overwrite_existing);
+            if (ec) {
+                log::error("Failed to copy file, not adding script");
+                return;
+            }
 
             this->onClose(nullptr);
             ScriptPopup::create()->show();
@@ -146,11 +150,7 @@ bool ScriptPopup::init() {
             continue;
         }
 
-        ifstream file(entry.path());
-        std::string content(
-            (istreambuf_iterator<char>(file)),
-            istreambuf_iterator<char>()
-        );
+        std::string content = utils::file::readString(entry.path()).unwrap();
 
         auto parseResult = matjson::parse(content);
         if (!parseResult.isOk()) {
