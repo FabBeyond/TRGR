@@ -42,6 +42,10 @@ endif()
 
 FetchContent_MakeAvailable(lua)
 
+if(TARGET lua_static)
+    target_compile_definitions(lua_static PRIVATE LUA_USE_POSIX=0)
+endif()
+
 FetchContent_Declare(
     sol2
     GIT_REPOSITORY "https://github.com/ThePhD/sol2.git"
