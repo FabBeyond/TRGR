@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include "createPopup.hpp"
+#include "Geode/loader/Log.hpp"
 #include "Geode/utils/file.hpp"
 #include "scriptPopup.hpp"
 #include <cctype>
@@ -16,8 +17,8 @@ void CreatePopup::createScript(CCObject* sender) {
     }
 
     matjson::Value script;
-    script["name"] = nameInput->getString();
-    script["description"] = descriptionInput->getString();
+    script["name"] = std::string(nameInput->getString());
+    script["description"] = std::string(descriptionInput->getString());
 
     std::string code;
 
@@ -34,7 +35,10 @@ void CreatePopup::createScript(CCObject* sender) {
     std::transform(filename.begin(), filename.end(), filename.begin(), ::tolower);
     filename += ".json";
 
-    utils::file::writeStringSafe(Mod::get()->getSaveDir() / filename, script.dump());
+    auto result = utils::file::writeStringSafe(Mod::get()->getSaveDir() / filename, script.dump());
+    if (!result.isOk()) {
+        log::error("Failed to write to json file, not creating script");
+    }
 
     this->onClose(nullptr);
     ScriptPopup::instance->close();
