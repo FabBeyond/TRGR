@@ -3,7 +3,6 @@
 #include <Geode/Geode.hpp>
 
 using namespace geode::prelude;
-using namespace std;
 
 class CreatePopup : public Popup {
 protected:

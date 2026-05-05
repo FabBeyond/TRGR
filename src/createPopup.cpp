@@ -57,7 +57,7 @@ void CreatePopup::pickFile(CCObject* sender) {
 
     async::spawn(
         file::pick(file::PickMode::OpenFile, options),
-        [this](Result<optional<filesystem::path>> result) {
+        [this](Result<std::optional<std::filesystem::path>> result) {
             onFilePicked(std::move(result));
         }
     );

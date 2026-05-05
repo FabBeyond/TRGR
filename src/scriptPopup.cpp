@@ -10,7 +10,7 @@
 #include "createPopup.hpp"
 
 using namespace geode::prelude;
-using namespace filesystem;
+using namespace std::filesystem;
 
 ScriptPopup* ScriptPopup::instance = nullptr;
 
@@ -107,7 +107,7 @@ void ScriptPopup::installScript(CCObject* sender) {
 
     async::spawn(
         file::pick(file::PickMode::OpenFile, options),
-        [this](Result<optional<filesystem::path>> result) {
+        [this](Result<std::optional<std::filesystem::path>> result) {
             if (!result.isOk()) {
                 return;
             }
