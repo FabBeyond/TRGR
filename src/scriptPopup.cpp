@@ -27,7 +27,7 @@ void ScriptPopup::runCode(CCObject* sender) {
 
     auto path = Mod::get()->getSaveDir() / obj->getCString();
     Result<std::string> content = utils::file::readString(path);
-    if (content.isOk()) {
+    if (!content.isOk()) {
         log::info("Failed to read script code, not executing script");
         return;
     }

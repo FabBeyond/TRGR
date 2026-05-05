@@ -1,3 +1,6 @@
+# 1.0.8
+- Fix bug that breaks script executing
+
 # 1.0.7
 - internal changes one last time i swear
 
