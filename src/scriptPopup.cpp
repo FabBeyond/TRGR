@@ -11,7 +11,6 @@
 
 using namespace geode::prelude;
 using namespace filesystem;
-using namespace std;
 
 ScriptPopup* ScriptPopup::instance = nullptr;
 

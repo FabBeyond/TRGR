@@ -4,7 +4,6 @@
 #include "scriptPopup.hpp"
 
 using namespace geode::prelude;
-using namespace std;
 
 $execute {
     setupLuaAPI();

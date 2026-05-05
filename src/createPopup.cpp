@@ -9,7 +9,6 @@
 
 
 using namespace geode::prelude;
-using namespace std;
 
 void CreatePopup::createScript(CCObject* sender) {
     if (nameInput->getString() == "") {
