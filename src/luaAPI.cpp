@@ -4,7 +4,6 @@
 #include <Geode/binding/LevelEditorLayer.hpp>
 
 using namespace geode::prelude;
-using namespace std;
 
 sol::state lua;
 
@@ -26,7 +25,7 @@ ZLayer intToZLayer(int value) {
 
 void addFunctions(sol::table gd) {
     gd.set_function("getById", [](int id) {
-        vector<GameObject*> objects;
+        std::vector<GameObject*> objects;
         for (auto obj : CCArrayExt<GameObject*>(LevelEditorLayer::get()->getAllObjects())) {
             if (obj->m_objectID == id) {
                 objects.push_back(obj);
@@ -38,7 +37,7 @@ void addFunctions(sol::table gd) {
         return LevelEditorLayer::get()->getAllObjects();
     });
     gd.set_function("getSelected", []() {
-        vector<GameObject*> objects;
+        std::vector<GameObject*> objects;
         for (auto obj : CCArrayExt<GameObject*>(LevelEditorLayer::get()->getAllObjects())) {
             if (obj->m_isSelected) {
                 objects.push_back(obj);
@@ -47,7 +46,7 @@ void addFunctions(sol::table gd) {
         return objects;
     });
     gd.set_function("getByGroup", [](int group) {
-        vector<GameObject*> objects;
+        std::vector<GameObject*> objects;
         for (auto obj : CCArrayExt<GameObject*>(LevelEditorLayer::get()->getAllObjects())) {
             for (int i = 0; i < obj->m_groupCount; i++) {
                 if (obj->m_groups->at(i) == group) {

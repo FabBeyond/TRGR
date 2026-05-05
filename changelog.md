@@ -1,3 +1,6 @@
+# 1.0.7
+- internal changes one last time i swear
+
 # 1.0.6
 - Internal changes once again
 
