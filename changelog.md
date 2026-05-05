@@ -1,3 +1,6 @@
+# 1.0.5
+- Even more internal changes
+
 # 1.0.4
 - More internal changes
 - Added all platforms
