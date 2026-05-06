@@ -176,6 +176,46 @@ void setupGameObjectProperties(sol::usertype<GameObject>& type) {
         [](GameObject* self) { return self->m_isHide; },
         [](GameObject* self, bool hide) { self->m_isHide = hide;}
     );
+    type["nonStickX"] = sol::property(
+        [](GameObject* self) { return self->m_isNonStickX; },
+        [](GameObject* self, bool nonStickX) { self->m_isNonStickX = nonStickX;}
+    );
+    type["extraStickyY"] = sol::property(
+        [](GameObject* self) { return self->m_isExtraSticky; },
+        [](GameObject* self, bool extraSickyY) { self->m_isExtraSticky = extraSickyY;}
+    );
+    type["extendedCollision"] = sol::property(
+        [](GameObject* self) { return self->m_hasExtendedCollision; },
+        [](GameObject* self, bool extendedCollision) { self->m_hasExtendedCollision = extendedCollision;}
+    );
+    type["iceBlock"] = sol::property(
+        [](GameObject* self) { return self->m_isIceBlock; },
+        [](GameObject* self, bool iceBlock) { self->m_isIceBlock = iceBlock;}
+    );
+    type["gripSlope"] = sol::property(
+        [](GameObject* self) { return self->m_isGripSlope; },
+        [](GameObject* self, bool gripSlope) { self->m_isGripSlope = gripSlope;}
+    );
+    type["noGlow"] = sol::property(
+        [](GameObject* self) { return self->m_hasNoGlow; },
+        [](GameObject* self, bool noGlow) { self->m_hasNoGlow = noGlow;}
+    );
+    type["noParticle"] = sol::property(
+        [](GameObject* self) { return self->m_hasNoParticles; },
+        [](GameObject* self, bool noParticle) { self->m_hasNoParticles = noParticle;}
+    );
+    type["nonStickY"] = sol::property(
+        [](GameObject* self) { return self->m_isNonStickY; },
+        [](GameObject* self, bool nonStickY) { self->m_isNonStickY = nonStickY;}
+    );
+    type["scaleStick"] = sol::property(
+        [](GameObject* self) { return self->m_isScaleStick; },
+        [](GameObject* self, bool scaleStick) { self->m_isScaleStick = scaleStick;}
+    );
+    type["noAudioScale"] = sol::property(
+        [](GameObject* self) { return self->m_hasNoAudioScale; },
+        [](GameObject* self, bool noAudioScale) { self->m_hasNoAudioScale = noAudioScale;}
+    );
 }
 
 void setupLuaAPI() {

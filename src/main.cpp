@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <sol/sol.hpp>
-#include "include/luaAPI.hpp"
+#include "luaAPI/include/luaAPI.hpp"
 #include "include/scriptPopup.hpp"
 
 using namespace geode::prelude;

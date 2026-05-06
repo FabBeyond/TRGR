@@ -6,7 +6,7 @@
 #include "Geode/loader/Log.hpp"
 #include "Geode/utils/file.hpp"
 #include "Geode/utils/string.hpp"
-#include "include/luaAPI.hpp"
+#include "luaAPI/include/luaAPI.hpp"
 #include "include/createPopup.hpp"
 
 using namespace geode::prelude;
