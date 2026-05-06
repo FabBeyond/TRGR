@@ -1,4 +1,4 @@
-#include "scriptPopup.hpp"
+#include "include/scriptPopup.hpp"
 #include <Geode/Result.hpp>
 #include <filesystem>
 #include <matjson.hpp>
@@ -6,8 +6,8 @@
 #include "Geode/loader/Log.hpp"
 #include "Geode/utils/file.hpp"
 #include "Geode/utils/string.hpp"
-#include "luaAPI.hpp"
-#include "createPopup.hpp"
+#include "include/luaAPI.hpp"
+#include "include/createPopup.hpp"
 
 using namespace geode::prelude;
 using namespace std::filesystem;

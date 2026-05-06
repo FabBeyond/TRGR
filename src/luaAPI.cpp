@@ -1,7 +1,8 @@
-#include "luaAPI.hpp"
+#include "include/luaAPI.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/binding/EditorUI.hpp>
 #include <Geode/binding/LevelEditorLayer.hpp>
+#include <sol/property.hpp>
 
 using namespace geode::prelude;
 
@@ -80,6 +81,12 @@ void setupGameObjectMethods(sol::usertype<GameObject>& type) {
         LevelEditorLayer::get()->removeObject(self, false);
         EditorUI::get()->deselectAll();
     };
+    type["addGroup"] = [](GameObject* self, int group) {
+        self->addToGroup(group);
+    };
+    type["removeGroup"] = [](GameObject* self, int group) {
+        self->removeFromGroup(group);
+    };
 }
 
 void setupGameObjectProperties(sol::usertype<GameObject>& type) {
@@ -124,6 +131,50 @@ void setupGameObjectProperties(sol::usertype<GameObject>& type) {
     type["flipY"] = sol::property(
         [](GameObject* self) { return self->isFlipY(); },
         [](GameObject* self, bool f) { self->setFlipY(f); }
+    );
+    type["dontFade"] = sol::property(
+        [](GameObject* self) { return self->m_isDontFade; },
+        [](GameObject* self, bool dontFade) { self->m_isDontFade = dontFade;}
+    );
+    type["dontEnter"] = sol::property(
+        [](GameObject* self) { return self->m_isDontEnter; },
+        [](GameObject* self, bool dontEnter) { self->m_isDontEnter = dontEnter;}
+    );
+    type["noEffects"] = sol::property(
+        [](GameObject* self) { return self->m_hasNoEffects; },
+        [](GameObject* self, bool noEffects) { self->m_hasNoEffects = noEffects;}
+    );
+    type["grupParent"] = sol::property(
+        [](GameObject* self) { return self->m_hasGroupParent; },
+        [](GameObject* self, bool groupParent) { self->m_hasGroupParent = groupParent;}
+    );
+    type["areaParent"] = sol::property(
+        [](GameObject* self) { return self->m_hasAreaParent; },
+        [](GameObject* self, bool areaParent) { self->m_hasAreaParent = areaParent;}
+    );
+    type["dontBoostY"] = sol::property(
+        [](GameObject* self) { return self->m_isDontBoostY; },
+        [](GameObject* self, bool dontBoostY) { self->m_isDontBoostY = dontBoostY;}
+    );
+    type["dontBoostX"] = sol::property(
+        [](GameObject* self) { return self->m_isDontBoostX; },
+        [](GameObject* self, bool dontBoostX) { self->m_isDontBoostX = dontBoostX;}
+    );
+    type["highDetail"] = sol::property(
+        [](GameObject* self) { return self->m_isHighDetail; },
+        [](GameObject* self, bool highDetail) { self->m_isHighDetail = highDetail;}
+    );
+    type["noTouch"] = sol::property(
+        [](GameObject* self) { return self->m_isNoTouch; },
+        [](GameObject* self, bool noTouch) { self->m_isNoTouch = noTouch;}
+    );
+    type["passable"] = sol::property(
+        [](GameObject* self) { return self->m_isPassable; },
+        [](GameObject* self, bool passable) { self->m_isPassable = passable;}
+    );
+    type["hide"] = sol::property(
+        [](GameObject* self) { return self->m_isHide; },
+        [](GameObject* self, bool hide) { self->m_isHide = hide;}
     );
 }
 

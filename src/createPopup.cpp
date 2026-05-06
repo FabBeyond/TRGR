@@ -1,8 +1,8 @@
 #include <Geode/Geode.hpp>
-#include "createPopup.hpp"
+#include "include/createPopup.hpp"
 #include "Geode/loader/Log.hpp"
 #include "Geode/utils/file.hpp"
-#include "scriptPopup.hpp"
+#include "include/scriptPopup.hpp"
 #include <cctype>
 #include <filesystem>
 #include <matjson.hpp>

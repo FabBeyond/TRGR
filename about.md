@@ -1,6 +1,6 @@
 # TRGR
 
-<cr>THIS MOD IS IN ALPHA! BUGS AND CRASHES MAY HAPPEN SO BACKUP ANY LEVEL YOU USE THIS ON!</c> \
+<cr>THIS MOD IS IN ALPHA! BUGS AND CRASHES MAY HAPPEN SO BACKUP ANY LEVEL YOU USE THIS ON!</c>
 
 ## General
 
@@ -96,3 +96,5 @@ The `GameObject` type also has the following methods:
 - `:rotate(degrees)`
 - `:scale(x, y)`
 - `:delete()`
+- `:addGroup(group)`
+- `:removeGroup(group)`
